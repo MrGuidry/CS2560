@@ -2,7 +2,7 @@
  * StructAsFunctionArgument.c
  *
  *  Created on: Feb 18, 2019
- *      Author: baseb
+ *      Author: Ryan Guidry
  */
 #include <stdio.h>
 #include <string.h>
