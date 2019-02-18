@@ -2,7 +2,7 @@
  * IfElse.c
  *
  *  Created on: Feb 14, 2019
- *      Author: baseb
+ *      Author: Ryan Guidry
  */
 
 #include <stdio.h>
