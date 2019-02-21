@@ -1,7 +1,7 @@
 /*
  * Tic-Tac-ToeGame.c
  *
- *  Created on: Feb 18, 2019
+ *  Created on: February 18, 2019
  *      Author: Ryan Guidry
  */
 #include <stdio.h>
