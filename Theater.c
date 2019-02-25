@@ -43,7 +43,7 @@ void Theater(){
 	int size = sizeof(rowPrices)/sizeof(rowPrices[0]);
 	makePrices(rowPrices, size);
 	
-	double ticketSales = 0.0; 				//Declaration and Assignment of the variable used o track the total sales
+	double ticketSales = 0.0; 				//Declaration and Assignment of the variable used to track the total sales
 	
 	//Main Menu
 	int choice;
