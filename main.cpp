@@ -1,78 +1,99 @@
-#include "Date.h"
+#include "PatientAccount.h"
+#include "Pharmacy.h"
+#include "Surgery.h"
 #include <iostream>
-#include "main.h"
 
 using namespace std;
 
 int main() {
-	int day;
-	int month;
-	int year;
-	bool valid = false;
+	cout << "-----Welcome to Billy Bronco Medical Hospital-----" << endl;
+	
+	//Get days in hospital
+	bool good = false;
+	int days;
+	while (!good) {
+		cout << "How many days will the patient be at the hospital?" << endl;
+		cin >> days;
+		if (days > 0) { 
+			good = true; 
+		}
+		else {
+			cout << "Invalid number of days...Try Again." << endl;
+		}
+	}
 
-	//Input validation for the month and day
-	while (!valid) {
-		cout << "Enter the month (1-12):";
-		cin >> month;
-		cout << "Enter the day (1-31):";
-		cin >> day;
-		if (month >= 1 && month <= 12) {
-			if (day >= 1) {
-				if (month == 2 && day <= 28) {
-					valid = true;
+	//Creation of PatientAccount, Surgery, and Pharmacy
+	PatientAccount patient(days);
+	Surgery surgery;
+	Pharmacy pharmacy;
+
+	//Main loop
+	bool finished = false;
+	int choice;
+	while (!finished) {
+		bool valid = false;
+		while (!valid) {
+			cout << "----Hospital Main Menu----" << endl;
+			cout << "1. Choose Surgery" << endl;
+			cout << "2. Choose Medication" << endl;
+			cout << "3. Checkout patient" << endl;
+			cin >> choice;
+			if (choice >= 1 && choice <= 3) { 
+				valid = true; 
+			}
+			else {
+				cout << "Invalid Choice...Try Again." << endl;
+			}
+		}
+		switch (choice) {
+			case 1:
+				valid = false;
+				while (!valid) {
+					cout << "Which surgery would you like?" << endl;
+					cout << "1. Hip Replacement" << endl;
+					cout << "2. Knee Replacement" << endl;
+					cout << "3. Gastric Bypass" << endl;
+					cout << "4. Cornea" << endl;
+					cout << "5. Spinal Fusion" << endl;
+					cin >> choice;
+					if (choice >= 1 && choice <= 5) { 
+						valid = true; 
+					}
+					else {
+						cout << "Invalid Choice...Try Again" << endl;
+					}
 				}
-				else {
-					if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day <= 31) {
+				surgery.updateCharges(surgery.getSurgeryCost(choice),patient);
+				break;
+			case 2:
+				valid = false;
+				while (!valid) {
+					cout << "Which medication would you like?" << endl;
+					cout << "1. Vicodin (60 10 mg tablets)" << endl;
+					cout << "2. Amoxicillin (4 250 mg tablets)" << endl;
+					cout << "3. Lipitor (30 10 mg tablets)" << endl;
+					cout << "4. Hydrochlorothiazide (30 25 mg tablets)" << endl;
+					cout << "5. Lisinopril (30 20 mg tablets)" << endl;
+					cin >> choice;
+					if (choice >= 1 && choice <= 5) {
 						valid = true;
 					}
 					else {
-						if ((month == 4 || month == 6 || month == 9 || month == 11) && day <= 30) {
-							valid = true;
-						}
-						else {
-							cout << "Invalid day...Try again." << endl;
-						}
+						cout << "Invalid Choice...Try Again" << endl;
 					}
 				}
-			}
-			 
+				pharmacy.updateCharges(pharmacy.getMedicationPrice(choice), patient);
+				break;
+			case 3:
+				cout << "Patient has been checked out." << endl;
+				cout << "Total Charges: $" << patient.getCharges() << endl;
+				finished = true;
+				break;
+			default:
+				break;
 		}
-		else {
-			cout << "Invalid month...Try again." << endl;
-		}
+
 	}
-	cout << "Enter the year:" << endl;
-	cin >> year;
-	
-	//Creating first Date
-	Date date(month, day, year);
-	
-	//Printing different layouts of the Date
-	date.printDate1();
-	date.printDate2();
-	date.printDate3();
-
-	//Incrementing the Date by 1
-	date = date++;
-	cout << "Incremented Date: ";
-	cout << date << endl;
-
-	//Return Date back to original
-	date = date--;
-
-	//Decrementing the Date by 1
-	date = date--;
-	cout << "Decremented Date: ";
-	cout << date << endl;
-
-	//Creating new date using overload of >>
-	Date date2;
-	cin >> date2;
-	cout << "Second Date: ";
-	cout << date2 << endl;
-
-	//Printing the overload of - so represent the days between two dates
-	cout << "Days between the two dates: " << date - date2 << endl;
 
 	return 0;
 }
