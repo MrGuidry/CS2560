@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>   //using namespace sf 
 #include <time.h> 
 #include <iostream>
-#include "Frogger Game.h"
 
 
 //dimensions for window size and background 
@@ -18,8 +17,6 @@ const int numberOfCars = 18;
 
 //Set initial direction to a value not dependent on a key press
 int direction = -1;     
-
-
 
 struct Part {
 	int x, y;
@@ -166,7 +163,7 @@ int main()
 	float timer = 0.0f, delay = 0.35f;
 
 
-	//CREATE ALL THE OBJECTS!!!!!!!!!!!!!!!
+	//CREATE ALL THE OBJECTS
 	Frog frog;
 	Log logs[numberOfLogs];
 	Car cars[numberOfCars];
@@ -222,12 +219,13 @@ int main()
 
 		//This is the minimize the carry over of user input for the direction during the movement phase
 	
+		if (timer < delay/1.2) {
 			//Control for Frogger by User 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) direction = 0;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) direction = 2;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) direction = 3;
-		
-
+		}
+			
 		if (timer > delay)
 		{
 			timer = 0; //reset timer
